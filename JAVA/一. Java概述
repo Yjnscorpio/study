@@ -1,0 +1,85 @@
+2016-12-23
+Java语言是SUN(Stanford University Network，斯坦福大学网络公司)公司1995年推出的一门高级编程语言
+
+Java 的应用非常广泛：
+ 1、Web开发：Java非常适合开发大型的企业网站，例如人人网、去哪儿网的后台都是Java。
+ 2、Android开发：Android手机上APP几乎都是用Java开发的，例如QQ、微信、UC浏览器。
+ 3、客户端开发：Java也可以用来开发电脑上的软件，例如Elicpse、Netbeans。
+ 4、嵌入式应用：嵌入式应用就是在小型电子产品中运行的软件，例如老式手机上的软件、MP3上的软件。
+
+我们编写的Java源码，编译后会生成一种 .class 文件，称为字节码文件。Java虚拟机就是负责将字节码文件翻译成特定平台下的机器码然后运行。也就是说，只要在不同平台上安装对应的JVM，就可以运行字节码文件，运行我们编写的Java程序。
+编译的结果不是生成机器码，而是生成字节码，字节码不能直接运行，必须通过JVM翻译成机器码才能运行。不同平台下编译生成的字节码是一样的，但是由JVM翻译成的机器码却不一样。
+跨平台的是Java程序，不是JVM。JVM是用C/C++开发的，是编译后的机器码，不能跨平台，不同平台下需要安装不同版本的JVM。
+
+Java 有三个版本，分别为 J2SE、J2EE和J2ME，以下是详细介绍。
+J2SE(Java 2 Platform Standard Edition) 标准版
+J2SE是Java的标准版，主要用于开发客户端（桌面应用软件），例如常用的文本编辑器、下载软件、即时通讯工具等，都可以通过J2SE实现。
+J2SE包含了Java的核心类库，例如数据库连接、接口定义、输入/输出、网络编程等。学习Java编程就是从J2SE入手。
+J2EE(Java 2 Platform Enterprise Edition) 企业版
+J2EE是功能最丰富的一个版本，主要用于开发高访问量、大数据量、高并发量的网站，例如美团、去哪儿网的后台都是J2EE。通常所说的JSP开发就是J2EE的一部分。
+J2EE包含J2SE中的类，还包含用于开发企业级应用的类，例如EJB、servlet、JSP、XML、事务控制等。
+J2EE也可以用来开发技术比较庞杂的管理软件，例如ERP系统（Enterprise Resource Planning，企业资源计划系统）。
+J2ME(Java 2 Platform Micro Edition) 微型版
+J2ME 只包含J2SE中的一部分类，受平台影响比较大，主要用于嵌入式系统和移动平台的开发，例如呼机、智能卡、手机（功能机）、机顶盒等。
+注意：Android手机有自己的开发组件，不使用J2ME进行开发。
+
+
+JDK 是一系列工具的集合，这些工具是编译Java源码、运行Java程序所必需的，例如JVM、基础类库、编译器、打包工具等。不论是什么样的 Java 应用服务器，都是内置了某个版本的 JDK，因此掌握 JDK 是学好 Java 的第一步。
+JDK所提供的部分工具：
+    java编译器：javac.exe
+    java解释器：java.exe
+    java文档生成器：javadoc.exe
+    java调试器：jdb.exe
+进入环境变量配置窗口，在“用户变量”中，设置3项属性，JAVA_HOME、PATH、CLASSPATH（大小写无所谓），若已存在则点击“编辑”，不存在则点击“新建”：
+    JAVA_HOME：设为JDK的安装路径(如D:\Program Files\jdk1.7.0_71)，此路径下包括lib，bin，jre等文件夹（此变量最好设置，因为以后运行tomcat，eclipse等都需要依靠此变量）。
+    Path：使得系统可以在任何路径下识别java命令，设为：%JAVA_HOME%\bin。%JAVA_HOME%就是引用前面指定的JAVA_HOME变量。
+    CLASSPATH：Java运行环境加载类的路径，只有类在classpath中，才能被识别和加载，设为 .;%JAVA_HOME%\lib（注意前面的点号(.)，点号表示当前路径）。
+打开一个CMD窗口，输入“java -version”或者“javac”命令，看到很多说明信息，证明已经安装并配置成功了。
+
+Eclipse是一款Java集成开发环境(IDE)。Java IDE有很多，有免费的，有收费的，有英文的，中文的，有多国语言的，Eclipse 是最常用的一款，IT公司大部分员工都使用Eclipse。
+
+启动Eclipse编写hello World 程序：http://www.weixueyuan.net/view/5947.html
+    public class HelloWorld {
+        public static void main(String[] args){
+            System.out.println("Hello World!");
+        }
+    }
+Java 中主类名应该和要保存的 Java 文件名相同，也就是说，这里定义的类名是“HelloWorld”，则文件应该保存为“HelloWorld.java”。
+
+Java中的类可以看做C语言中结构体的升级版。结构体是一种构造数据类型，可以包含不同的成员（变量），每个成员的数据类型可以不一样；可以通过结构体来定义结构体变量，每个变量拥有相同的性质。
+Java中的类也是一种构造数据类型，但是进行了一些扩展，类的成员不但可以是变量，还可以是函数；通过类定义出来的变量也有特定的称呼，叫做“对象”
+类所包含的变量和函数都有特定的称呼，变量被称为属性（通常也称成员变量），函数被称为方法，属性和方法统称为类的成员。
+
+面向对象编程(Object Oriented Programming, OOP)
+类是一个通用的概念，Java、C++、C#、PHP等很多编程语言中都有类，都可以通过类创建对象。可以将类看做是结构体的升级版，C语言的晚辈们看到了C语言的不足，尝试加以改善，继承了结构体的思想，并进行了升级，让程序员在开发或扩展大中型项目时更加容易。因为Java、C++等语言都支持类和对象，所以使用这些语言编写程序也被称为面向对象编程，这些语言也被称为面向对象的编程语言。C语言因为不支持类和对象的概念，被称为面向过程的编程语言。实际上，面向对象只是面向过程的升级。在C语言中，可以将完成某个功能的重复使用的代码块定义为函数，将具有一类功能的函数声明在一个头文件中，不同类型的函数声明在不同的头文件，以便对函数进行更好的管理，方便编写和调用。在Java中，可以将完成某个功能的代码块定义为方法，将具有相似功能的方法定义在一个类中，也就是定义在一个源文件中（因为一个源文件只能包含一个公共的类），多个源文件可以位于一个文件夹，这个文件夹有特定的称呼，叫做包。
+
+
+Java 官方为开发者提供了很多功能强大的类，这些类被分别放在各个包中，随JDK一起发布，称为Java类库或Java API。
+API(Application Programming Interface, 应用程序编程接口)是一个通用概念。例如，获取CPU信息的方法：
+    getCpuInfo(int cpuType);
+这就是一个API。也就是说，该文档中描述的类的使用方法，就叫做API。
+
+Java API也有一个说明文档，入口地址：http://www.oracle.com/technetwork/java/api
+选择对应版本的Java，点击链接进入即可。J2SE 1.7 的API地址为：http://docs.oracle.com/javase/7/docs/api/
+
+Java类库中有很多包：
+    以 java.* 开头的是Java的核心包，所有程序都会使用这些包中的类；
+    以 javax.* 开头的是扩展包，x 是 extension 的意思，也就是扩展。虽然 javax.* 是对 java.* 的优化和扩展，但是由于 javax.* 使用的越来越多，很多程序都依赖于 javax.*，所以 javax.* 也是核心的一部分了，也随JDK一起发布。
+    以 org.* 开头的是各个机构或组织发布的包，因为这些组织很有影响力，它们的代码质量很高，所以也将它们开发的部分常用的类随JDK一起发布。
+
+如果你希望使用Java包中的类，就必须先使用import语句导入。
+import语句与C语言中的 #include 有些类似，语法为：
+    import package1[.package2…].classname;
+package 为包名，classname 为类名。例如：
+    import java.util.Date;  // 导入 java.util 包下的 Date 类
+    import java.util.Scanner;  // 导入 java.util 包下的 Scanner 类
+    import javax.swing.*;  // 导入 javax.swing 包下的所有类，* 表示所有类
+注意：
+    import 只能导入包所包含的类，而不能导入包。
+    为方便起见，我们一般不导入单独的类，而是导入包下所有的类，例如 import java.util.*;。
+    
+    安装JDK时，我们已经设置了环境变量 CLASSPATH 来指明类库的路径，它的值为 .;%JAVA_HOME%\lib，而 JAVA_HOME 又为 D:\Program Files\jdk1.7.0_71，所以 CLASSPATH 等价于 .;D:\Program Files\jdk1.7.0_71\lib。
+Java 运行环境将依次到下面的路径寻找并载入字节码文件 Test.class：
+    .p1\Test.class（"."表示当前路径）
+    D:\Program Files\jdk1.7.0_71\lib\p1\Test.class
+如果在第一个路径下找到了所需的类文件，则停止搜索，否则继续搜索后面的路径，如果在所有的路径下都未能找到所需的类文件，则编译或运行出错。你可以在CLASSPATH变量中增加搜索路径，例如 .;%JAVA_HOME%\lib;C:\javalib，那么你就可以将类文件放在 C:\javalib 目录下，Java运行环境一样会找到。
