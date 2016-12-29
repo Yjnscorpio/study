@@ -1,0 +1,94 @@
+2016-12-28
+Java中共有8种基本数据类型，包括4 种整型、2 种浮点型、1 种字符型、1 种布尔型，请见下表。
+                                Java基本数据类型        
+数据类型    	说明 	       所占内存   	举例 	                       备注
+byte 	      字节型 	      1 byte 	   3, 127 	 
+short 	     短整型 	      2 bytes   	3, 32767 	 
+int 	       整型         	4 bytes   	3, 21474836 	 
+long 	      长整型 	      8 bytes 	  3L, 92233720368L           	 long最后要有一个L字母（大小写无所谓）。
+float 	     单精度浮点型 	 4 bytes   	1.2F, 223.56F              	 float最后要有一个F字母（大小写无所谓）。
+double     	双精度浮点型 	 8 bytes 	  1.2, 1.2D, 223.56, 223.56D 	 double最后最好有一个D字母（大小写无所谓）。
+char 	      字符型         2 bytes  	'a', ‘A’ 	                    字符型数据只能是一个字符，由单引号包围。
+boolean 	   布尔型 	       1 bit 	true, false 	 
+
+对于整型数据，通常情况下使用 int 类型。但如果表示投放广岛长崎的原子弹释放出的能量，就需要使用 long 类型了。byte 和 short 类型主要用于特定的应用场合，例如，底层的文件处理或者需要控制占用存储空间量的大数组。
+
+八进制有一个前缀 0，例如 010 对应十进制中的 8；十六进制有一个前缀 0x，例如 0xCAFE；从 Java 7 开始，可以使用前缀 0b 来表示二进制数据，例如 0b1001 对应十进制中的 9。同样从 Java 7 开始，可以使用下划线来分隔数字，类似英文数字写法，例如 1_000_000 表示 1,000,000，也就是一百万。下划线只是为了让代码更加易读，编译器会删除这些下划线。
+
+另外，不像 C/C++，Java 不支持无符号类型(unsigned)。
+float 类型有效数字最长为 7 位，有效数字长度包括了整数部分和小数部分。例如：
+    float x = 223.56F;
+    float y = 100.00f;
+注意：每个float类型后面都有一个标志“F”或“f”，有这个标志就代表是float类型。
+
+double 类型有效数字最长为 15 位。与 float 类型一样，double 后面也带有标志“D”或“d”。例如：
+    double x = 23.45D;
+    double y = 422.22d;
+    double z = 562.234;
+注意：不带任何标志的浮点型数据，系统默认是 double 类型。
+
+ 对布尔型的说明
+如果你有编程经验，了解布尔型，请跳过下面的教程，下面的教程针对只有C语言基础的读者（C语言没有布尔型）。
+在C语言中，如果判断条件成立，会返回1，否则返回0，例如：
+    #include <stdio.h>
+    int main(){
+        int x = 100>10;
+        int y = 100<10;
+        printf("100>10 = %d\n", x);
+        printf("100<10 = %d\n", y);
+        return 0;
+    }
+运行结果：
+100>10 = 1
+100<10 = 0
+
+但是在Java中不一样，条件成立返回 true，否则返回 false，即布尔类型。例如：
+    public class Demo {
+        public static void main(String[] args){
+            // 字符型
+            boolean a = 100>10;
+            boolean b = 100<10;
+            System.out.println("100>10 = " + a);
+            System.out.println("100<10 = " + b);
+           
+            if(a){
+                System.out.println("100<10是对的");
+            }else{
+                System.out.println("100<10是错的");
+            }
+        }
+    }
+运行结果：
+100>10 = true
+100<10 = false
+100<10是对的
+实际上，true 等同于1，false 等同于0，只不过换了个名称，并单独地成为一种数据类型。
+
+ 自动数据类型转换
+自动转换按从低到高的顺序转换。不同类型数据间的优先关系如下：
+    低--------------------------------------------->高
+    byte,short,char-> int -> long -> float -> double
+
+运算中，不同类型的数据先转化为同一类型，然后进行运算，转换规则如下：
+操作数1类型 	                           操作数2类型 	转换后的类型
+byte、short、char 	                      int 	       int
+byte、short、char、int 	                 long      	  long
+byte、short、char、int、long 	           float     	  float
+byte、short、char、int、long、float     	double 	     double
+强制数据类型转换
+强制转换的格式是在需要转型的数据前加上“( )”，然后在括号内加入需要转化的数据类型。有的数据经过转型运算后，精度会丢失，而有的会更加精确，下面的例子可以说明这个问题。
+    public class Demo {
+        public static void main(String[] args){
+            int x;
+            double y;
+            x = (int)34.56 + (int)11.2;  // 丢失精度
+            y = (double)x + (double)10 + 1;  // 提高精度
+            System.out.println("x=" + x);
+            System.out.println("y=" + y);
+        }
+    }
+
+运行结果：
+x=45
+y=56.0
+仔细分析上面程序段：由于在 34.56 前有一个 int 的强制类型转化，所以 34.56 就变成了 34。同样 11.2 就变成了 11 了，所以 x 的结果就是 45。在 x 前有一个 double 类型的强制转换，所以 x 的值变为 45.0，而 10 的前面也被强制成 double 类型，所以也变成 10.0，所以最后 y 的值变为 56。
